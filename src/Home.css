@@ -1,0 +1,59 @@
+.home-page {
+  display: grid;
+  min-height: 100vh;
+  place-items: center;
+  padding: 24px;
+  background:
+    radial-gradient(ellipse at 15% 15%, rgba(227, 38, 54, 0.14), transparent 35%),
+    #0d0d0f;
+  color: #f8f8fa;
+  font-family: 'Outfit', 'Segoe UI', sans-serif;
+}
+
+.home-card {
+  width: min(100%, 520px);
+  padding: 56px 36px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 18px;
+  background: #171719;
+  text-align: center;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.45);
+}
+
+.home-eyebrow {
+  color: #f06a75;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+}
+
+.home-card h1 {
+  margin: 16px 0 10px;
+  font-size: clamp(30px, 6vw, 42px);
+  letter-spacing: -0.04em;
+}
+
+.home-card p {
+  margin-bottom: 28px;
+  color: #aaaab1;
+  font-size: 14px;
+}
+
+.home-card a {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  padding: 0 20px;
+  background: #bd1728;
+  color: white;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 160ms ease;
+}
+
+.home-card a:hover {
+  background: #e32636;
+}
