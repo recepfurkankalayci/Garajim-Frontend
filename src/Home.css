@@ -430,128 +430,33 @@
   background:
     radial-gradient(ellipse at 50% 65%, rgba(202, 35, 48, 0.13), transparent 38%),
     linear-gradient(145deg, #19191c, #161619);
-  cursor: grab;
-  outline: none;
-  touch-action: none;
   user-select: none;
 }
 
-.home-car-stage:active {
-  cursor: grabbing;
-}
-
-.home-car-stage:focus-visible {
-  box-shadow: inset 0 0 0 2px rgba(239, 79, 91, 0.75);
-}
-
-.home-stage-grid {
-  position: absolute;
-  inset: 0;
-  opacity: 0.33;
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
-  background-position: center;
-  background-size: 38px 38px;
-  mask-image: linear-gradient(transparent, #000 22%, #000 76%, transparent);
-  pointer-events: none;
-}
-
-.home-stage-orbit {
-  position: absolute;
-  top: 48%;
-  left: 50%;
-  width: min(64%, 440px);
-  aspect-ratio: 2.4;
-  transform: translate(-50%, -50%);
-  border: 1px solid rgba(255, 255, 255, 0.075);
-  border-radius: 50%;
-  pointer-events: none;
-}
-
-.home-stage-orbit-two {
-  width: min(47%, 330px);
-  aspect-ratio: 2.25;
-  border-color: rgba(227, 38, 54, 0.1);
-}
-
-.home-car-view {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-}
-
-.home-model-canvas {
+.home-car-image {
   display: block;
-  width: 100%;
-  height: 100%;
+  width: 90%;
+  max-height: 84%;
+  object-fit: contain;
+  filter: drop-shadow(0 15px 20px rgba(0, 0, 0, 0.45));
 }
 
-.home-model-status,
-.home-model-error {
-  position: absolute;
-  z-index: 2;
-  top: 12px;
-  left: 13px;
-  border: 1px solid rgba(255, 255, 255, 0.09);
-  border-radius: 5px;
-  background: rgba(17, 17, 19, 0.8);
-  padding: 5px 8px;
-  color: #aaaab2;
-  font-size: 9px;
-}
-
-.home-model-error {
-  border-color: rgba(227, 38, 54, 0.4);
-  color: #ff8992;
-}
-
-.home-model-credit {
+.home-image-credit {
   padding: 0 22px 12px;
   color: #74747d;
   font-size: 8px;
   text-align: right;
 }
 
-.home-model-credit a {
+.home-image-credit a {
   color: #a4a4ad;
   text-decoration: underline;
   text-decoration-color: rgba(164, 164, 173, 0.35);
   text-underline-offset: 2px;
 }
 
-.home-model-credit a:hover {
+.home-image-credit a:hover {
   color: #ff8992;
-}
-
-.home-stage-caption {
-  position: absolute;
-  z-index: 2;
-  bottom: 12px;
-  left: 50%;
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  transform: translateX(-50%);
-  color: #85858e;
-  font-size: 9px;
-  white-space: nowrap;
-  pointer-events: none;
-}
-
-.home-drag-indicator {
-  color: #ef6873;
-  font-size: 14px;
-}
-
-.home-angle {
-  position: absolute;
-  right: 13px;
-  bottom: 12px;
-  color: #66666f;
-  font-size: 9px;
-  font-variant-numeric: tabular-nums;
 }
 
 .home-car-panel-footer {
@@ -588,34 +493,6 @@
   color: white;
   font-size: 7px;
   letter-spacing: 0;
-}
-
-.home-rotation-controls {
-  display: flex;
-  align-items: center;
-  gap: 11px;
-  color: #898992;
-  font-size: 9px;
-}
-
-.home-rotation-controls button {
-  display: grid;
-  width: 25px;
-  height: 25px;
-  place-items: center;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 6px;
-  background: transparent;
-  color: #c9c9cf;
-  font-size: 13px;
-  cursor: pointer;
-  transition: border-color 150ms ease, color 150ms ease, background 150ms ease;
-}
-
-.home-rotation-controls button:hover {
-  border-color: rgba(227, 38, 54, 0.55);
-  background: rgba(227, 38, 54, 0.1);
-  color: #ff7580;
 }
 
 .home-car-condition {
@@ -862,28 +739,10 @@
     margin: 11px 10px 0;
   }
 
-  .home-stage-orbit {
-    width: 80%;
-  }
-
-  .home-stage-orbit-two {
-    width: 60%;
-  }
-
   .home-car-panel-footer {
     min-height: 54px;
     gap: 8px;
     padding: 0 12px;
-  }
-
-  .home-rotation-controls {
-    gap: 5px;
-    font-size: 8px;
-  }
-
-  .home-rotation-controls button {
-    width: 23px;
-    height: 23px;
   }
 
   .home-car-condition {
@@ -938,7 +797,7 @@
     margin-left: auto;
   }
 
-  .home-model-credit {
+  .home-image-credit {
     padding: 0 12px 10px;
     text-align: center;
   }
@@ -955,8 +814,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .home-nav-link,
-  .home-rotation-controls button {
+  .home-nav-link {
     transition: none;
   }
 }

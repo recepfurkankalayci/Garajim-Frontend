@@ -1,8 +1,6 @@
-import { lazy, Suspense, useRef, useState } from 'react';
+import { useState } from 'react';
 import './Home.css';
 import { garageVehicles } from './data/vehicles';
-
-const VehicleModelViewer = lazy(() => import('./VehicleModelViewer'));
 
 const navigationItems = [
   { id: 'overview', label: 'Genel Bakış', icon: 'grid', href: '#overview' },
@@ -28,31 +26,7 @@ function NavigationIcon({ name }) {
 
 function Home() {
   const [activeSection, setActiveSection] = useState('overview');
-  const [rotation, setRotation] = useState(0);
-  const dragRef = useRef(null);
   const activeVehicle = garageVehicles[0];
-
-  const handlePointerDown = (event) => {
-    dragRef.current = { pointerId: event.pointerId, clientX: event.clientX };
-    event.currentTarget.setPointerCapture(event.pointerId);
-  };
-
-  const handlePointerMove = (event) => {
-    if (dragRef.current?.pointerId !== event.pointerId) return;
-    const delta = event.clientX - dragRef.current.clientX;
-    dragRef.current.clientX = event.clientX;
-    setRotation((current) => (current + delta * 0.8 + 360) % 360);
-  };
-
-  const stopDragging = () => {
-    dragRef.current = null;
-  };
-
-  const rotateWithKeyboard = (event) => {
-    if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
-    event.preventDefault();
-    setRotation((current) => (current + (event.key === 'ArrowRight' ? 15 : -15) + 360) % 360);
-  };
 
   return (
     <main className="home-shell">
@@ -139,38 +113,12 @@ function Home() {
               <button className="home-more-button" type="button" aria-label="Araç seçenekleri">•••</button>
             </div>
 
-            <div
-              className="home-car-stage"
-              onPointerDown={handlePointerDown}
-              onPointerMove={handlePointerMove}
-              onPointerUp={stopDragging}
-              onPointerCancel={stopDragging}
-              onLostPointerCapture={stopDragging}
-              onKeyDown={rotateWithKeyboard}
-              role="slider"
-              aria-label="Aracı döndür"
-              aria-valuemin={0}
-              aria-valuemax={359}
-              aria-valuenow={Math.round(rotation)}
-              aria-valuetext={`Araç açısı ${Math.round(rotation)} derece`}
-              tabIndex={0}
-            >
-              <div className="home-stage-grid" aria-hidden="true" />
-              <span className="home-stage-orbit home-stage-orbit-one" aria-hidden="true" />
-              <span className="home-stage-orbit home-stage-orbit-two" aria-hidden="true" />
-              <Suspense fallback={<span className="home-model-status" role="status">3B görüntüleyici hazırlanıyor…</span>}>
-                <VehicleModelViewer
-                  key={activeVehicle.id}
-                  modelUrl={activeVehicle.model3d.src}
-                  modelName={`${activeVehicle.brand} ${activeVehicle.model}`}
-                  rotation={rotation}
-                />
-              </Suspense>
-              <div className="home-stage-caption">
-                <span className="home-drag-indicator" aria-hidden="true">↔</span>
-                <span>Aracı döndürmek için sürükleyin</span>
-              </div>
-              <span className="home-angle">{Math.round(rotation).toString().padStart(3, '0')}°</span>
+            <div className="home-car-stage">
+              <img
+                className="home-car-image"
+                src={activeVehicle.image.src}
+                alt={activeVehicle.image.alt}
+              />
             </div>
 
             <div className="home-car-panel-footer">
@@ -178,15 +126,10 @@ function Home() {
                 <span className="home-plate-flag" aria-hidden="true">TR</span>
                 <span>{activeVehicle.licensePlate}</span>
               </div>
-              <div className="home-rotation-controls" aria-label="Araç döndürme kontrolleri">
-                <button type="button" onClick={() => setRotation((current) => (current - 30 + 360) % 360)} aria-label="Aracı sola döndür">←</button>
-                <span>360° görünüm</span>
-                <button type="button" onClick={() => setRotation((current) => (current + 30) % 360)} aria-label="Aracı sağa döndür">→</button>
-              </div>
               <span className="home-car-condition"><i /> Durum: {activeVehicle.condition}</span>
             </div>
-            <div className="home-model-credit">
-              3B model: <a href={activeVehicle.model3d.sourceUrl} target="_blank" rel="noreferrer">{activeVehicle.model3d.displayName} · {activeVehicle.model3d.author} · {activeVehicle.model3d.license}</a>
+            <div className="home-image-credit">
+              Fotoğraf: <a href={activeVehicle.image.sourceUrl} target="_blank" rel="noreferrer">{activeVehicle.image.credit} · {activeVehicle.image.license} · Wikimedia Commons</a>
             </div>
           </section>
 
